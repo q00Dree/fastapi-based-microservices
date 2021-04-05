@@ -2,14 +2,14 @@ version: '3.7'
 
 services:
   movie_service:
-    build: ../src/movies-service
+    build: ../src/movie-services
     command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
     volumes:
-      - ../src/movies-service/:/app/
+      - ../src/movie-services/:/app/
     ports:
       - 8001:8000
     environment:
-      - DATABASE_URI=postgresql://q00Dree:q00Dree@movie_db/movie_db_dev
+      - DATABASE_URI=postgresql://qoodree:qoodree@movie_db/movie_db_dev
       - CAST_SERVICE_HOST_URL=http://cast_service:8000/api/v1/casts/
 
   movie_db:
@@ -17,29 +17,29 @@ services:
     volumes:
       - postgres_data_movie:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=q00Dree
-      - POSTGRES_PASSWORD=q00Dree
+      - POSTGRES_USER=qoodree
+      - POSTGRES_PASSWORD=qoodree
       - POSTGRES_DB=movie_db_dev
 
   cast_service:
-    build: ../src/casts-service
+    build: ../src/cast-services
     command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
     volumes:
-      - ../src/casts-service/:/app/
+      - ../src/cast-services/:/app/
     ports:
       - 8002:8000
     environment:
-      - DATABASE_URI=postgresql://q00Dree:q00Dree@cast_db/cast_db_dev
+      - DATABASE_URI=postgresql://qoodree:qoodree@cast_db/cast_db_dev
 
   cast_db:
     image: postgres:12.1-alpine
     volumes:
       - postgres_data_cast:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=q00Dree
-      - POSTGRES_PASSWORD=q00Dree
+      - POSTGRES_USER=qoodree
+      - POSTGRES_PASSWORD=qoodree
       - POSTGRES_DB=cast_db_dev
-      
+
   nginx:
     image: nginx:latest
     ports:
