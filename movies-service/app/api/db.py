@@ -1,13 +1,11 @@
-from sqlalchemy import (Column, Integer, 
-                        MetaData, String, 
-                        Table, create_engine, ARRAY)
+import os
+
+from sqlalchemy import (Column, DateTime, Integer, MetaData, String, Table,
+                        create_engine, ARRAY)
 
 from databases import Database
 
-import os
-
-# DATABASE_URL = 'postgresql://postgres:postgres@localhost/movie_db'
-DATABASE_URI = os.getenv('DATABASE_URI')
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 engine = create_engine(DATABASE_URL)
 metadata = MetaData()
