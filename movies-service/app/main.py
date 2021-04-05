@@ -1,29 +1,17 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-from typing import List
+from app.api.movies import movies
+from app.api.db import metadata, database, engine
 
-try:
-    from app.api.movies import movies
-    from app.api.db import metadata, database, engine
-    import uvicorn
-except ModuleNotFoundError:
-    from api.movies import movies
-    from api.db import metadata, database, engine
-    import uvicorn
+metadata.create_all(engine)
 
-app = FastAPI()
+app = FastAPI(openapi_url="/api/v1/movies/openapi.json", docs_url="/api/v1/movies/docs")
 
 @app.on_event("startup")
 async def startup():
-    await database.connect()
+  await database.connect()
 
 @app.on_event("shutdown")
 async def shutdown():
-    await database.disconnect()
+  await database.disconnect()
 
-
-# app.include_router(movies)
 app.include_router(movies, prefix='/api/v1/movies', tags=['movies'])
-
-if __name__ == "__main__":
-    uvicorn.run(app, host = "0.0.0.0", port = 8000)

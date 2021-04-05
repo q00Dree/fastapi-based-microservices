@@ -1,14 +1,9 @@
 from typing import List
-from fastapi import Header, APIRouter
+from fastapi import APIRouter, HTTPException
 
-try:
-    from app.api.models import MovieIn, MovieOut
-    from app.api import db_manager
-    from app.api.service import is_cast_present
-except ModuleNotFoundError:
-    from .models import MovieIn, MovieOut
-    from .db_manager import db_manager
-    from .service import is_cast_present
+from app.api.models import MovieOut, MovieIn, MovieUpdate
+from app.api import db_manager
+from app.api.service import is_cast_present
 
 movies = APIRouter()
 
