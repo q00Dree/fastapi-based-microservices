@@ -90,4 +90,4 @@ curl -X 'DELETE' \
   -H 'accept: application/json'
 ```
 
-## 3) Enjoy =)
+## 4) Enjoy =)
