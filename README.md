@@ -5,7 +5,7 @@
 ## 1) Clone repository and deploy all services with one command below.
 
 ```
-git clone https://https://github.com/q00Dree/fastapi-based-microservices.git \
+git clone https://github.com/q00Dree/fastapi-based-microservices.git \
 && cd fastapi-based-microservices \
 && cd deploy \
 && bash deploy.sh
